@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block titulo %} estado de las presas {% endblock %}
+
+{% block contenido %}
+ <div class="card">
+    <div class="card-header">
+        estado de las presas
+    </div>
+    <div class="card-body">
+        <h4 class="card-title"> estado de las presas</h4>
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        
+                        <th scope="col">nombre</th>
+                        <th scope="col">nivel de agua actual en %</th>
+                        <th scope="col">ph del agua(0-14)</th>
+                        <th scope="col">capacidad maxima de la presa (lts)</th>
+                        <th scope="col">temperatura del agua °C</th>
+                        <th scope="col">indicador de peligo</th>
+                        <th scope="col">fecha de la ultima revision</th>
+                        
+                        <th scope="col">acciones</th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        {% for Presa in usuarios %}
+                    <tr class="">
+                        
+                        <td scope="row">{{Presa.nombre}}</td>
+                        <td>
+                            <a id="boton-peligro" class="btn {% if Presa.nivel_agua > 80 %}btn-danger{% elif Presa.nivel_agua >= 60 %}btn-warning{% else %}btn-success{% endif %}" >{{Presa.nivel_agua}}</a>
+                        </td>
+                        <td scope="row"><a id="boton-peligro" class="btn {% if Presa.ph > 10 %}btn-danger{% elif Presa.ph >= 7 %}btn-warning{% else %}btn-success{% endif %}" >{{Presa.ph}}</a></td>
+                        <td scope="row">{{Presa.capacidad_maxima}}</td>
+                        <td scope="row"><a id="boton-peligro" class="btn {% if Presa.temperatura_agua > 30 %}btn-danger{% elif Presa.temperatura_agua >= 20 %}btn-warning{% else %}btn-success{% endif %}" >{{Presa.temperatura_agua}}</a></td>
+                        <td>
+                            <a id="boton-peligro" class="btn {% if Presa.nivel_agua > 80 %}btn-danger{% elif Presa.nivel_agua >= 60 %}btn-warning{% else %}btn-success{% endif %}" >----</a>
+                        </td>
+                          
+
+                        <td scope="row">{{Presa.fecha_ultima_revision}}</td>
+                        <td>
+                            <a name="" id="" class="btn btn-info" href="{% url 'editarNota' Presa.id %}" role="button">Editar</a>
+                            <a name="" id="" class="btn btn-danger" href="{% url 'eliminarNota' Presa.id %}" role="button">Eliminar</a>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    <div class="card-footer text-muted">
+
+    </div>
+ </div>
+
+ {% endblock %}
